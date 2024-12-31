@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe/components/categories.dart';
 import 'package:recipe/components/search_bar.dart';
 import 'package:recipe/constants/constants.dart';
 import 'package:recipe/pages/create_recipe_page.dart';
@@ -138,6 +139,10 @@ class _HomeState extends State<Home> {
         child: Column(
           children: [
             MySearchBar(),
+            SizedBox(
+              height: 20,
+            ),
+            Categories()
           ],
         ),
       )),
