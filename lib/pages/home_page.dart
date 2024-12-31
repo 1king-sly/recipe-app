@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe/components/search_bar.dart';
 import 'package:recipe/constants/constants.dart';
 import 'package:recipe/pages/create_recipe_page.dart';
 import 'package:recipe/pages/dashboard_page.dart';
@@ -15,7 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
   List screens = const [
-    Scaffold(),
+    Home(),
     FavoritesPage(),
     CreateRecipePage(),
     DashboardPage(),
@@ -33,6 +34,15 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         backgroundColor: mainColor,
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.notifications_outlined,
+                color: Colors.white,
+                size: 20,
+              ))
+        ],
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -107,6 +117,30 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: screens[currentIndex],
+    );
+  }
+}
+
+class Home extends StatefulWidget {
+  const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: SingleChildScrollView(
+          child: Padding(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          children: [
+            MySearchBar(),
+          ],
+        ),
+      )),
     );
   }
 }
