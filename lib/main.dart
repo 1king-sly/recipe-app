@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe/pages/home_page.dart';
 import 'package:recipe/pages/splash_screen.dart';
 
 void main() {
@@ -9,7 +10,7 @@ void main() {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner:false,
-      home: const SplashScreen(),
+      home: const HomePage(),
     ));
 }
 

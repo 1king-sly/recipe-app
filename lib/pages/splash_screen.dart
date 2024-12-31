@@ -2,9 +2,9 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:recipe/pages/home_page.dart';
 
 
-import '../main.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -19,7 +19,7 @@ class SplashScreen extends StatelessWidget {
           width: 90,
         ),
       ),
-      nextScreen: const MyHomePage(title: 'Flutter Demo Home Page'),
+      nextScreen: const HomePage(),
       duration: 10500,
       pageTransitionType: PageTransitionType.fade,
     );
