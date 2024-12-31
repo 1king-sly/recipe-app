@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe/components/categories.dart';
+import 'package:recipe/components/recipe_card.dart';
 import 'package:recipe/components/search_bar.dart';
 import 'package:recipe/constants/constants.dart';
 import 'package:recipe/pages/create_recipe_page.dart';
@@ -132,17 +133,51 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SingleChildScrollView(
           child: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            MySearchBar(),
-            SizedBox(
+            const MySearchBar(),
+            const SizedBox(
               height: 20,
             ),
-            Categories()
+            const Categories(),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Popular Recipes",
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
+                ),
+                IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.arrow_right_outlined)),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            GridView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.78,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20),
+                itemCount: images.length,
+                itemBuilder: (context, index) {
+                  return RecipeCard(
+                    imagePath: images[index],
+                  );
+                })
           ],
         ),
       )),
