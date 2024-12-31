@@ -21,7 +21,7 @@ class SplashScreen extends StatelessWidget {
       ),
       nextScreen: const HomePage(),
       duration: 10500,
-      pageTransitionType: PageTransitionType.fade,
+      pageTransitionType: PageTransitionType.rightToLeft,
     );
   }
 }

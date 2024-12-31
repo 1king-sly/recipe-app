@@ -14,19 +14,25 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
-  List screens = [
-    const HomePage(),
-    const FavoritesPage(),
-    const CreateRecipePage(),
-    const DashboardPage(),
-    const ProfilePage(),
+  List screens = const [
+    Scaffold(),
+    FavoritesPage(),
+    CreateRecipePage(),
+    DashboardPage(),
+    ProfilePage(),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:const Text("Home Page"),
-        backgroundColor:mainColor,
+        title: const Text(
+          "Recipes",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 14,
+          ),
+        ),
+        backgroundColor: mainColor,
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
