@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                 });
               },
               icon: Icon(
-                Icons.favorite,
+                Icons.favorite_outline,
                 color: currentIndex == 1 ? mainColor : Colors.grey.shade400,
                 size: 25,
               ),
