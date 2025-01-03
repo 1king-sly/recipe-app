@@ -25,6 +25,11 @@ class _RecipeCardState extends State<RecipeCard> {
           ),
         );
       },
+      onDoubleTap: () {
+        setState(() {
+          isFavorite = isFavorite ? false : true;
+        });
+      },
       child: Stack(
         children: [
           Container(
