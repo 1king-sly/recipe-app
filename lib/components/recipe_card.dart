@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:recipe/constants/constants.dart';
+import 'package:recipe/pages/single_recipe_page.dart';
 
 class RecipeCard extends StatefulWidget {
   final String imagePath;
@@ -16,7 +16,15 @@ class _RecipeCardState extends State<RecipeCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (BuildContext context) => SingleRecipePage(
+              imagePath: widget.imagePath,
+            ),
+          ),
+        );
+      },
       child: Stack(
         children: [
           Container(

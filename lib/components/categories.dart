@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe/types/data_types.dart';
 
 class Categories extends StatefulWidget {
   const Categories({super.key});
@@ -20,19 +21,20 @@ class _CategoriesState extends State<Categories> {
               Container(
                 width: 65,
                 height: 65,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                        image: AssetImage('assets/images/appstore.png'),
+                        image: AssetImage(categories[index].imagePath),
                         fit: BoxFit.cover)),
               ),
               const SizedBox(height: 5),
-              const Text("Categories",
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal))
+              Text(categories[index].name,
+                  style: const TextStyle(
+                      fontSize: 12, fontWeight: FontWeight.normal))
             ],
           );
         },
-        itemCount: 20,
+        itemCount: categories.length,
         separatorBuilder: (BuildContext context, int index) => const SizedBox(
           width: 20,
         ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:recipe/constants/constants.dart';
 
 class FavoriteRecipeCard extends StatefulWidget {
   final String imagePath;
