@@ -57,6 +57,14 @@ class _SingleRecipePageState extends State<SingleRecipePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text(
+          "Recipe Name",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
         backgroundColor: mainColor,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
@@ -88,14 +96,98 @@ class _SingleRecipePageState extends State<SingleRecipePage> {
                 height: 5,
               ),
               RecipeOwnerCard(
-                user: RecipeOwner(name: "Byrone Kingsly",imagePath: "assets/images/user.jpg"),
+                user: RecipeOwner(
+                    name: "Byrone Kingsly",
+                    imagePath: "assets/images/user.jpg"),
               ),
-              const Center(
-                child: Column(
-                  children: [
-                    Text("Ingredients and Instructions"),
-                  ],
-                ),
+              const SizedBox(
+                height: 5,
+              ),
+              const Divider(),
+              const Center(child: Text("1 hr 30 mins")),
+              const Divider(),
+              Column(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      borderRadius: const BorderRadius.all(Radius.circular(30)),
+                    ),
+                    child: const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Ingredients",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            SizedBox(width: 5),
+                            Text(
+                              "2 People",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Divider(),
+                        Text("1. One Cup of Water"),
+                        SizedBox(height: 2),
+                        Text("1. One Cup of Water"),
+                        SizedBox(height: 2),
+                        Text("1. One Cup of Water"),
+                        SizedBox(height: 2),
+                        Text("1. One Cup of Water"),
+                        SizedBox(height: 2),
+                        Text("1. One Cup of Water"),
+                        SizedBox(height: 2),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      borderRadius: const BorderRadius.all(Radius.circular(30)),
+                    ),
+                    child: const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Instructions",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        Divider(),
+                        Text("1. Boil the water for 15 minutes"),
+                        SizedBox(height: 2),
+                        Text("1. Boil the water for 15 minutes"),
+                        SizedBox(height: 2),
+                        Text("1. Boil the water for 15 minutes"),
+                        SizedBox(height: 2),
+                        Text("1. Boil the water for 15 minutes"),
+                        SizedBox(height: 2),
+                        Text("1. Boil the water for 15 minutes"),
+                        SizedBox(height: 2),
+                      ],
+                    ),
+                  )
+                ],
               ),
             ],
           ),
