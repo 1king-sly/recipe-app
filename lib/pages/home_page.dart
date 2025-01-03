@@ -4,7 +4,7 @@ import 'package:recipe/components/recipe_card.dart';
 import 'package:recipe/components/search_bar.dart';
 import 'package:recipe/constants/constants.dart';
 import 'package:recipe/pages/create_recipe_page.dart';
-import 'package:recipe/pages/dashboard_page.dart';
+import 'package:recipe/pages/blog_page.dart';
 import 'package:recipe/pages/favorites_page.dart';
 import 'package:recipe/pages/profile_page.dart';
 
@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
     Home(),
     FavoritesPage(),
     CreateRecipePage(),
-    DashboardPage(),
+    BlogPage(),
     ProfilePage(),
   ];
   @override
@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                   currentIndex = 3;
                 });
               },
-              icon: Icon(Icons.dashboard_outlined,
+              icon: Icon(Icons.newspaper_outlined,
                   color: currentIndex == 3 ? mainColor : Colors.grey.shade400,
                   size: 25),
             ),
