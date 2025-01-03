@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe/pages/single_recipe_page.dart';
 
 class FavoriteRecipeCard extends StatefulWidget {
   final String imagePath;
@@ -12,7 +13,15 @@ class _FavoriteRecipeCardState extends State<FavoriteRecipeCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (BuildContext context) => SingleRecipePage(
+              imagePath: widget.imagePath,
+            ),
+          ),
+        );
+      },
       child: SizedBox(
         height: 80,
         width: double.infinity,

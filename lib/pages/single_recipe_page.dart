@@ -103,6 +103,26 @@ class _SingleRecipePageState extends State<SingleRecipePage> {
               const SizedBox(
                 height: 5,
               ),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade200,
+                  borderRadius: const BorderRadius.all(Radius.circular(30)),
+                ),
+                child: const Center(
+                  child: Text(
+                    "This is a very brief description of the dish being prepared",
+                    // style: TextStyle(
+                    //   fontSize: 14,
+                    //   color: Colors.grey,
+                    // ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
               const Divider(),
               const Center(child: Text("1 hr 30 mins")),
               const Divider(),
@@ -186,7 +206,7 @@ class _SingleRecipePageState extends State<SingleRecipePage> {
                         SizedBox(height: 2),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ],
