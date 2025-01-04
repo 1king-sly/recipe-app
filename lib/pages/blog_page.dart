@@ -18,7 +18,7 @@ class _BlogPageState extends State<BlogPage> {
         body: LazyLoadScrollView(
           onEndOfPage: () {},
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical:20),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
             child: ListView.separated(
               itemBuilder: (BuildContext context, int index) {
                 return const BlogCard();

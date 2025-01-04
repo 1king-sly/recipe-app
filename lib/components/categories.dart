@@ -24,7 +24,7 @@ class _CategoriesState extends State<Categories> {
                   Navigator.of(context).push(
                     MaterialPageRoute<void>(
                         builder: (BuildContext context) => SingleCategoryPage(
-                            categoryName: categories[index].name)),
+                            categoryName: categories[index].name.toString())),
                   );
                 },
                 child: Container(
@@ -38,7 +38,7 @@ class _CategoriesState extends State<Categories> {
                 ),
               ),
               const SizedBox(height: 5),
-              Text(categories[index].name,
+              Text(categories[index].name.toString(),
                   style: const TextStyle(
                       fontSize: 12, fontWeight: FontWeight.normal))
             ],
