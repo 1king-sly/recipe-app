@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:recipe/constants/constants.dart';
 import 'package:recipe/pages/single_recipe_page.dart';
+import 'package:recipe/types/data_types.dart';
 
 class RecipeCard extends StatefulWidget {
   final String imagePath;
-  const RecipeCard({super.key, required this.imagePath});
+  final String recipeName;
+  const RecipeCard({super.key, required this.imagePath, required this.recipeName});
 
   @override
   State<RecipeCard> createState() => _RecipeCardState();
@@ -17,10 +19,14 @@ class _RecipeCardState extends State<RecipeCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+                final recipe = recipes.firstWhere(
+          (recipe) => recipe.name == widget.recipeName,
+          orElse: () => throw Exception('Recipe not found'),
+        );
         Navigator.of(context).push(
           MaterialPageRoute<void>(
             builder: (BuildContext context) => SingleRecipePage(
-              imagePath: widget.imagePath,
+              imagePath: widget.imagePath, recipe:recipe ,
             ),
           ),
         );
@@ -59,9 +65,9 @@ class _RecipeCardState extends State<RecipeCard> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "Recipe Name",
-                          style: TextStyle(fontSize: 13, color: Colors.white),
+                         Text(
+                          widget.recipeName,
+                          style:const TextStyle(fontSize: 13, color: Colors.white),
                         ),
                         IconButton(
                           onPressed: () {

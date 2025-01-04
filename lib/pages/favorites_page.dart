@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import 'package:recipe/components/favorites_recipe_card.dart';
 import 'package:recipe/constants/constants.dart';
+import 'package:recipe/types/data_types.dart';
 
 class FavoritesPage extends StatefulWidget {
   const FavoritesPage({super.key});
@@ -20,7 +21,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
         onEndOfPage: () {},
         child: ListView.separated(
             itemBuilder: (BuildContext context, int index) {
-              return FavoriteRecipeCard(imagePath: images[index]);
+              return FavoriteRecipeCard(imagePath: recipes[index].images[0], recipeName: recipes[index].name,);
             },
             separatorBuilder: (BuildContext context, int index) =>
                 const SizedBox(height: 10),

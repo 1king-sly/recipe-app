@@ -21,10 +21,16 @@ class _CategoriesState extends State<Categories> {
             children: [
               GestureDetector(
                 onTap: () {
+                    final filteredRecipes = recipes.where(
+                    (recipe) =>
+                        recipe.category == categories[index].name,
+                  ).toList();
                   Navigator.of(context).push(
                     MaterialPageRoute<void>(
                         builder: (BuildContext context) => SingleCategoryPage(
-                            categoryName: categories[index].name.toString())),
+                            categoryName: categories[index].name, recipes:filteredRecipes,),
+                            ),
+                            
                   );
                 },
                 child: Container(

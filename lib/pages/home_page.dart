@@ -7,6 +7,7 @@ import 'package:recipe/pages/create_recipe_page.dart';
 import 'package:recipe/pages/blog_page.dart';
 import 'package:recipe/pages/favorites_page.dart';
 import 'package:recipe/pages/profile_page.dart';
+import 'package:recipe/types/data_types.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -172,10 +173,10 @@ class _HomeState extends State<Home> {
                     childAspectRatio: 0.78,
                     crossAxisSpacing: 20,
                     mainAxisSpacing: 20),
-                itemCount: images.length,
+                itemCount: 6,
                 itemBuilder: (context, index) {
                   return RecipeCard(
-                    imagePath: images[index],
+                    imagePath: recipes[index].images[0], recipeName: recipes[index].name,
                   );
                 })
           ],

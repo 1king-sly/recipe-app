@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:recipe/pages/single_recipe_page.dart';
+import 'package:recipe/types/data_types.dart';
 
 class FavoriteRecipeCard extends StatefulWidget {
   final String imagePath;
-  const FavoriteRecipeCard({super.key, required this.imagePath});
+    final String recipeName;
+
+  const FavoriteRecipeCard({super.key, required this.imagePath, required this.recipeName});
 
   @override
   State<FavoriteRecipeCard> createState() => _FavoriteRecipeCardState();
@@ -14,10 +17,14 @@ class _FavoriteRecipeCardState extends State<FavoriteRecipeCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+                        final recipe = recipes.firstWhere(
+          (recipe) => recipe.name == widget.recipeName,
+          orElse: () => throw Exception('Recipe not found'),
+        );
         Navigator.of(context).push(
           MaterialPageRoute<void>(
             builder: (BuildContext context) => SingleRecipePage(
-              imagePath: widget.imagePath,
+              imagePath: widget.imagePath,recipe:recipe ,
             ),
           ),
         );

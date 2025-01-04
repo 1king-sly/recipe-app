@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:recipe/components/recipe_card.dart';
 import 'package:recipe/constants/constants.dart';
+import 'package:recipe/types/data_types.dart';
 
 class SingleCategoryPage extends StatefulWidget {
-  final String categoryName;
-  const SingleCategoryPage({super.key, required this.categoryName});
+  final CategoryName categoryName;
+  final List<Recipe> recipes;
+  const SingleCategoryPage({super.key, required this.categoryName, required this.recipes});
 
   @override
   State<SingleCategoryPage> createState() => _SingleCategoryPageState();
@@ -15,8 +17,8 @@ class _SingleCategoryPageState extends State<SingleCategoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Text(
-          widget.categoryName,
+        title: Text(
+          widget.categoryName.toString(),
           style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
@@ -40,7 +42,8 @@ class _SingleCategoryPageState extends State<SingleCategoryPage> {
               itemCount: images.length,
               itemBuilder: (context, index) {
                 return RecipeCard(
-                  imagePath: images[index],
+                  imagePath: recipes[index].images[0],
+                  recipeName: recipes[index].name,
                 );
               }),
         ),

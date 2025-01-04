@@ -5,6 +5,7 @@ import 'package:recipe/constants/constants.dart';
 import 'package:recipe/types/data_types.dart';
 
 class SingleRecipePage extends StatefulWidget {
+  final Recipe recipe;
   final String imagePath;
 
   final List<Widget> imageSliders = images
@@ -46,7 +47,7 @@ class SingleRecipePage extends StatefulWidget {
                 )),
           ))
       .toList();
-  SingleRecipePage({super.key, required this.imagePath});
+  SingleRecipePage({super.key, required this.imagePath, required this.recipe});
 
   @override
   State<SingleRecipePage> createState() => _SingleRecipePageState();
