@@ -6,7 +6,8 @@ import 'package:recipe/types/data_types.dart';
 class RecipeCard extends StatefulWidget {
   final String imagePath;
   final String recipeName;
-  const RecipeCard({super.key, required this.imagePath, required this.recipeName});
+  const RecipeCard(
+      {super.key, required this.imagePath, required this.recipeName});
 
   @override
   State<RecipeCard> createState() => _RecipeCardState();
@@ -19,14 +20,14 @@ class _RecipeCardState extends State<RecipeCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-                final recipe = recipes.firstWhere(
+        final recipe = recipes.firstWhere(
           (recipe) => recipe.name == widget.recipeName,
           orElse: () => throw Exception('Recipe not found'),
         );
         Navigator.of(context).push(
           MaterialPageRoute<void>(
             builder: (BuildContext context) => SingleRecipePage(
-              imagePath: widget.imagePath, recipe:recipe ,
+              recipe: recipe,
             ),
           ),
         );
@@ -65,21 +66,28 @@ class _RecipeCardState extends State<RecipeCard> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                         Text(
-                          widget.recipeName,
-                          style:const TextStyle(fontSize: 13, color: Colors.white),
+                        Expanded(
+                          flex: 3,
+                          child: Text(
+                            widget.recipeName,
+                            style: const TextStyle(
+                                fontSize: 13, color: Colors.white),
+                          ),
                         ),
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              isFavorite = isFavorite ? false : true;
-                            });
-                          },
-                          icon: Icon(
-                            isFavorite
-                                ? Icons.favorite
-                                : Icons.favorite_outline,
-                            color: isFavorite ? mainColor : Colors.white,
+                        Expanded(
+                          flex: 1,
+                          child: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                isFavorite = isFavorite ? false : true;
+                              });
+                            },
+                            icon: Icon(
+                              isFavorite
+                                  ? Icons.favorite
+                                  : Icons.favorite_outline,
+                              color: isFavorite ? mainColor : Colors.white,
+                            ),
                           ),
                         )
                       ],

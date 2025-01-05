@@ -24,7 +24,7 @@ class _FavoriteRecipeCardState extends State<FavoriteRecipeCard> {
         Navigator.of(context).push(
           MaterialPageRoute<void>(
             builder: (BuildContext context) => SingleRecipePage(
-              imagePath: widget.imagePath,recipe:recipe ,
+              recipe:recipe ,
             ),
           ),
         );

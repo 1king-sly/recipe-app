@@ -20,7 +20,7 @@ class Recipe {
   final CategoryName category;
   final int people;
   final String name;
-  final String? description;
+  final String description;
   final String time;
   final RecipeOwner user;
   final List<String> images;
@@ -31,7 +31,7 @@ class Recipe {
       {required this.category,
       required this.people,
       required this.name,
-      this.description,
+      required this.description,
       required this.time,
       required this.user,
       required this.images,
@@ -39,24 +39,22 @@ class Recipe {
       required this.instructions});
 }
 
-
-
 final List<Category> categories = [
   Category(name: CategoryName.Drinks, imagePath: 'assets/images/appstore.png'),
   Category(name: CategoryName.Snacks, imagePath: 'assets/images/appstore.png'),
-  Category(name: CategoryName.BreakFast, imagePath: 'assets/images/appstore.png'),
+  Category(
+      name: CategoryName.BreakFast, imagePath: 'assets/images/appstore.png'),
   Category(name: CategoryName.Lunch, imagePath: 'assets/images/appstore.png'),
   Category(name: CategoryName.Dinner, imagePath: 'assets/images/appstore.png'),
   Category(name: CategoryName.Supper, imagePath: 'assets/images/appstore.png'),
   Category(name: CategoryName.Drinks, imagePath: 'assets/images/appstore.png'),
   Category(name: CategoryName.Snacks, imagePath: 'assets/images/appstore.png'),
-  Category(name: CategoryName.BreakFast, imagePath: 'assets/images/appstore.png'),
+  Category(
+      name: CategoryName.BreakFast, imagePath: 'assets/images/appstore.png'),
   Category(name: CategoryName.Lunch, imagePath: 'assets/images/appstore.png'),
   Category(name: CategoryName.Dinner, imagePath: 'assets/images/appstore.png'),
   Category(name: CategoryName.Supper, imagePath: 'assets/images/appstore.png'),
- 
 ];
-
 
 final List<Recipe> recipes = [
   Recipe(
@@ -81,8 +79,14 @@ final List<Recipe> recipes = [
     description: 'Crispy nachos with melted cheese and toppings.',
     time: '15 mins',
     user: RecipeOwner(name: 'Bob', imagePath: 'assets/images/user.jpg'),
-    images: ['assets/images/nachos1.jpg', 'assets/images/nachos2.jpg'],
-    ingredients: ['Tortilla chips', 'Cheese', 'Salsa', 'Guacamole', 'Jalapeños'],
+    images: ['assets/images/nacho1.jpg', 'assets/images/nacho2.jpg'],
+    ingredients: [
+      'Tortilla chips',
+      'Cheese',
+      'Salsa',
+      'Guacamole',
+      'Jalapeños'
+    ],
     instructions: [
       'Spread tortilla chips on a baking tray.',
       'Sprinkle with cheese and bake until melted.',
@@ -104,7 +108,7 @@ final List<Recipe> recipes = [
       'Pour batter into the pan and cook on both sides until golden.',
     ],
   ),
-   Recipe(
+  Recipe(
     category: CategoryName.Lunch,
     people: 3,
     name: 'Grilled Chicken Salad',
@@ -112,7 +116,13 @@ final List<Recipe> recipes = [
     time: '25 mins',
     user: RecipeOwner(name: 'Diana', imagePath: 'assets/images/user.jpg'),
     images: ['assets/images/salad1.jpg', 'assets/images/salad2.jpg'],
-    ingredients: ['Chicken breast', 'Lettuce', 'Cherry tomatoes', 'Cucumber', 'Olive oil'],
+    ingredients: [
+      'Chicken breast',
+      'Lettuce',
+      'Cherry tomatoes',
+      'Cucumber',
+      'Olive oil'
+    ],
     instructions: [
       'Season and grill the chicken breast until cooked.',
       'Chop lettuce, cherry tomatoes, and cucumber.',
@@ -128,7 +138,14 @@ final List<Recipe> recipes = [
     time: '40 mins',
     user: RecipeOwner(name: 'Ethan', imagePath: 'assets/images/user.jpg'),
     images: ['assets/images/spaghetti1.jpg', 'assets/images/spaghetti2.jpg'],
-    ingredients: ['Spaghetti', 'Ground beef', 'Tomato sauce', 'Garlic', 'Onion', 'Olive oil'],
+    ingredients: [
+      'Spaghetti',
+      'Ground beef',
+      'Tomato sauce',
+      'Garlic',
+      'Onion',
+      'Olive oil'
+    ],
     instructions: [
       'Boil spaghetti until al dente.',
       'Cook ground beef with garlic and onion in olive oil.',
@@ -158,7 +175,10 @@ final List<Recipe> recipes = [
     description: 'A vibrant smoothie bowl with fresh fruits.',
     time: '10 mins',
     user: RecipeOwner(name: 'Grace', imagePath: 'assets/images/user.jpg'),
-    images: ['assets/images/smoothiebowl1.jpg', 'assets/images/smoothiebowl2.jpg'],
+    images: [
+      'assets/images/smoothiebowl1.jpg',
+      'assets/images/smoothiebowl2.jpg'
+    ],
     ingredients: ['Banana', 'Berries', 'Yogurt', 'Granola', 'Honey'],
     instructions: [
       'Blend banana, berries, and yogurt into a smoothie.',
@@ -173,8 +193,17 @@ final List<Recipe> recipes = [
     description: 'Crispy and delicious vegetable spring rolls.',
     time: '30 mins',
     user: RecipeOwner(name: 'Henry', imagePath: 'assets/images/user.jpg'),
-    images: ['assets/images/springrolls1.jpg', 'assets/images/springrolls2.jpg'],
-    ingredients: ['Spring roll wrappers', 'Cabbage', 'Carrot', 'Soy sauce', 'Oil for frying'],
+    images: [
+      'assets/images/springrolls1.jpg',
+      'assets/images/springrolls2.jpg'
+    ],
+    ingredients: [
+      'Spring roll wrappers',
+      'Cabbage',
+      'Carrot',
+      'Soy sauce',
+      'Oil for frying'
+    ],
     instructions: [
       'Shred cabbage and carrot, then stir-fry with soy sauce.',
       'Place filling in wrappers and roll tightly.',
@@ -188,7 +217,10 @@ final List<Recipe> recipes = [
     description: 'A simple and nutritious avocado toast.',
     time: '5 mins',
     user: RecipeOwner(name: 'Ivy', imagePath: 'assets/images/user.jpg'),
-    images: ['assets/images/avocadotoast1.jpg', 'assets/images/avocadotoast2.jpg'],
+    images: [
+      'assets/images/avocadotoast1.jpg',
+      'assets/images/avocadotoast2.jpg'
+    ],
     ingredients: ['Bread', 'Avocado', 'Salt', 'Pepper', 'Lemon juice'],
     instructions: [
       'Toast the bread slices.',

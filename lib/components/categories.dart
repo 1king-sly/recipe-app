@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:recipe/pages/single_category_page.dart';
 import 'package:recipe/types/data_types.dart';
@@ -21,16 +23,20 @@ class _CategoriesState extends State<Categories> {
             children: [
               GestureDetector(
                 onTap: () {
-                    final filteredRecipes = recipes.where(
-                    (recipe) =>
-                        recipe.category == categories[index].name,
-                  ).toList();
+
+                  final filteredRecipes = recipes
+                      .where(
+                        (recipe) =>
+                            recipe.category.name == categories[index].name.name,
+                      )
+                      .toList();
                   Navigator.of(context).push(
                     MaterialPageRoute<void>(
-                        builder: (BuildContext context) => SingleCategoryPage(
-                            categoryName: categories[index].name, recipes:filteredRecipes,),
-                            ),
-                            
+                      builder: (BuildContext context) => SingleCategoryPage(
+                        categoryName: categories[index].name,
+                        recipes: filteredRecipes,
+                      ),
+                    ),
                   );
                 },
                 child: Container(
@@ -44,7 +50,7 @@ class _CategoriesState extends State<Categories> {
                 ),
               ),
               const SizedBox(height: 5),
-              Text(categories[index].name.toString(),
+              Text(categories[index].name.name,
                   style: const TextStyle(
                       fontSize: 12, fontWeight: FontWeight.normal))
             ],
