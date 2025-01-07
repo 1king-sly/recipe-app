@@ -2,6 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:recipe/components/ingredients_create_card.dart';
+import 'package:recipe/components/instructions_create_card.dart';
+import 'package:recipe/constants/constants.dart';
 
 class CreateRecipePage extends StatefulWidget {
   const CreateRecipePage({super.key});
@@ -13,7 +16,6 @@ class CreateRecipePage extends StatefulWidget {
 class _CreateRecipePageState extends State<CreateRecipePage> {
   File? galleryFile;
   final picker = ImagePicker();
- 
 
   @override
   Widget build(BuildContext context) {
@@ -45,56 +47,93 @@ class _CreateRecipePageState extends State<CreateRecipePage> {
                     ),
                   ),
           ),
-          const Padding(
-              padding: EdgeInsets.all(20),
-              child: Column(children: [
-                TextField(
-                  decoration: InputDecoration(
-                    hintText: "Title of your amazing dish...",
-                    hintStyle: TextStyle(color: Colors.grey),
-                    border: InputBorder.none,
-                  ),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(children: [
+              const TextField(
+                decoration: InputDecoration(
+                  hintText: "Title of your amazing dish...",
+                  hintStyle: TextStyle(color: Colors.grey),
+                  border: InputBorder.none,
                 ),
-                SizedBox(height: 10),
-                TextField(
-                  minLines: null,
-                  maxLines: null,
-                  expands: true,
-                  decoration: InputDecoration(
-                    hintText: "Description of your amazing dish...",
-                    hintStyle: TextStyle(color: Colors.grey),
-                    border: InputBorder.none,
-                  ),
+              ),
+              const SizedBox(height: 10),
+              const TextField(
+                minLines: null,
+                maxLines: null,
+                expands: true,
+                decoration: InputDecoration(
+                  hintText: "Description of your amazing dish...",
+                  hintStyle: TextStyle(color: Colors.grey),
+                  border: InputBorder.none,
                 ),
-                SizedBox(height: 10),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Serves"),
-                      TextField(
-                        decoration: InputDecoration(
-                          hintText: "2 people",
-                          hintStyle: TextStyle(color: Colors.grey),
-                          border: InputBorder.none,
-                        ),
-                        keyboardType: TextInputType.number,
+              ),
+              const SizedBox(height: 10),
+              const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Serves"),
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: "2 people",
+                        hintStyle: TextStyle(color: Colors.grey),
+                        border: InputBorder.none,
                       ),
-                    ]),
-                SizedBox(height: 10),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Cook Time"),
-                      TextField(
-                        decoration: InputDecoration(
-                          hintText: "1hr 30mins",
-                          hintStyle: TextStyle(color: Colors.grey),
-                          border: InputBorder.none,
-                        ),
+                      keyboardType: TextInputType.number,
+                    ),
+                  ]),
+              const SizedBox(height: 10),
+              const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Cook Time"),
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: "1hr 30mins",
+                        hintStyle: TextStyle(color: Colors.grey),
+                        border: InputBorder.none,
                       ),
-                    ]),
-              ]),
+                    ),
+                  ]),
+              const SizedBox(height: 10),
+              const IngredientsCreateCard(),
+              const SizedBox(height: 10),
+              const InstructionsCreateCard(),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor:Colors.grey.shade900,
+                      disabledBackgroundColor: Colors.grey.shade200,
+                      disabledForegroundColor:Colors.grey.shade500,
+                      padding:const EdgeInsets.all(10),
+
+                    ),
+                    onPressed:null,
+                    child: const Text("Save"),
+                  ),
+
+                  const SizedBox(width:5),
+
+                      OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor:mainColor,
+                      disabledBackgroundColor: mainColor,
+                      disabledForegroundColor:Colors.grey.shade500,
+                      padding:const EdgeInsets.all(10),
+
+                    ),
+                    onPressed:null,
+                    child: const Text("Publish"),
+                  ),
+                ],
               )
+            ]),
+          )
         ]),
       ),
     );

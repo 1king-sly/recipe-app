@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class InstructionsCreateCard extends StatefulWidget {
-  int numberOfInstructionsList;
-   InstructionsCreateCard(
-      {super.key, required this.numberOfInstructionsList});
+  const InstructionsCreateCard({super.key});
 
   @override
   State<InstructionsCreateCard> createState() => _InstructionsCreateCardState();
 }
 
 class _InstructionsCreateCardState extends State<InstructionsCreateCard> {
+  int numberOfInstructionsList = 2;
+
   @override
   Widget build(BuildContext context) {
     List<Widget> ingredientWidgets = List.generate(
-      widget.numberOfInstructionsList,
+      numberOfInstructionsList,
       (index) {
         return Column(
           children: [
@@ -79,7 +78,7 @@ class _InstructionsCreateCardState extends State<InstructionsCreateCard> {
             child: GestureDetector(
               onTap: () {
                 setState(() {
-                  widget.numberOfInstructionsList += 1;
+                  numberOfInstructionsList += 1;
                 });
               },
               child: const Row(
