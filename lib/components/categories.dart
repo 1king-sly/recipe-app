@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:recipe/pages/single_category_page.dart';
 import 'package:recipe/types/data_types.dart';

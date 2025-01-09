@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe/components/recipe_owner_card.dart';
 import 'package:recipe/constants/constants.dart';
@@ -17,6 +16,7 @@ class SingleRecipePage extends StatefulWidget {
 class _SingleRecipePageState extends State<SingleRecipePage> {
   @override
   Widget build(BuildContext context) {
+    // ignore: no_leading_underscores_for_local_identifiers
     PageController _controller = PageController();
     List<Widget> ingredientWidgets =
         widget.recipe.ingredients.map((ingredient) {

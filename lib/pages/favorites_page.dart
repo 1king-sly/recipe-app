@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
+import 'package:recipe/constants/constants.dart';
 import 'package:recipe/pages/single_recipe_page.dart';
-import 'package:recipe/types/data_types.dart';
 
 class FavoritesPage extends StatefulWidget {
   const FavoritesPage({super.key});
@@ -24,7 +24,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => SingleRecipePage(
-                      recipe: recipes[index],
+                      recipe: favourites[index],
                     ),
                   ));
                 },
@@ -35,21 +35,25 @@ class _FavoritesPageState extends State<FavoritesPage> {
                     width: 90,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage(recipes[index].images[0]),
+                        image: AssetImage(favourites[index].images[0]),
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
-                  title: Text(recipes[index].name,
+                  title: Text(favourites[index].name,
                       style: const TextStyle(
                           fontSize: 14, fontWeight: FontWeight.bold)),
                   subtitle: Text(
-                    recipes[index].description,
+                    favourites[index].description,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   trailing: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      setState(() {
+                        favourites.remove(favourites[index]);
+                      });
+                    },
                     child: Icon(
                       Icons.delete_outline_outlined,
                       color: Colors.grey.shade500,
@@ -60,7 +64,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
             },
             separatorBuilder: (BuildContext context, int index) =>
                 const Divider(),
-            itemCount: recipes.length),
+            itemCount: favourites.length),
       ),
     ));
   }

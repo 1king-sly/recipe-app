@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe/types/data_types.dart';
 
 const primaryColor = Color(0xffF5F5F5);
 const mainColor = Color(0xffff660e);
@@ -15,3 +16,5 @@ final List images = [
   "assets/images/food9.jpg",
   "assets/images/food10.jpg",
 ];
+
+final List<Recipe> favourites = [];

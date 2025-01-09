@@ -177,6 +177,7 @@ class _HomeState extends State<Home> {
                 itemBuilder: (context, index) {
                   return RecipeCard(
                     imagePath: recipes[index].images[0], recipeName: recipes[index].name,
+                    recipe:recipes[index],
                   );
                 })
           ],

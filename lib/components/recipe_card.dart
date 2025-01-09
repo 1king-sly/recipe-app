@@ -6,8 +6,12 @@ import 'package:recipe/types/data_types.dart';
 class RecipeCard extends StatefulWidget {
   final String imagePath;
   final String recipeName;
+  final Recipe recipe;
   const RecipeCard(
-      {super.key, required this.imagePath, required this.recipeName});
+      {super.key,
+      required this.imagePath,
+      required this.recipeName,
+      required this.recipe});
 
   @override
   State<RecipeCard> createState() => _RecipeCardState();
@@ -18,16 +22,13 @@ class _RecipeCardState extends State<RecipeCard> {
 
   @override
   Widget build(BuildContext context) {
+    isFavorite = favourites.contains(widget.recipe) ? true : false;
     return GestureDetector(
       onTap: () {
-        final recipe = recipes.firstWhere(
-          (recipe) => recipe.name == widget.recipeName,
-          orElse: () => throw Exception('Recipe not found'),
-        );
         Navigator.of(context).push(
           MaterialPageRoute<void>(
             builder: (BuildContext context) => SingleRecipePage(
-              recipe: recipe,
+              recipe: widget.recipe,
             ),
           ),
         );
@@ -35,6 +36,10 @@ class _RecipeCardState extends State<RecipeCard> {
       onDoubleTap: () {
         setState(() {
           isFavorite = isFavorite ? false : true;
+
+          isFavorite
+              ? favourites.add(widget.recipe)
+              : favourites.remove(widget.recipe);
         });
       },
       child: Stack(
@@ -80,6 +85,9 @@ class _RecipeCardState extends State<RecipeCard> {
                             onPressed: () {
                               setState(() {
                                 isFavorite = isFavorite ? false : true;
+                                if (isFavorite) {
+                                  favourites.add(widget.recipe);
+                                }
                               });
                             },
                             icon: Icon(
