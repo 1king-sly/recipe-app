@@ -3,6 +3,7 @@ import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import 'package:recipe/constants/constants.dart';
 import 'package:recipe/pages/single_recipe_page.dart';
 import 'package:recipe/types/data_types.dart';
+import 'dart:developer';
 
 class SingleCategoryPage extends StatefulWidget {
   final CategoryName categoryName;
@@ -15,6 +16,8 @@ class SingleCategoryPage extends StatefulWidget {
 }
 
 class _SingleCategoryPageState extends State<SingleCategoryPage> {
+  bool isFavorite = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,30 +39,51 @@ class _SingleCategoryPageState extends State<SingleCategoryPage> {
           padding: const EdgeInsets.all(20),
           child: ListView.separated(
               separatorBuilder: (context, index) => const Divider(),
-              itemCount: recipes.length,
+              itemCount: widget.recipes.length,
               itemBuilder: (context, index) {
+                log(widget.recipes[index] as String);
+                isFavorite =
+                    favourites.contains(widget.recipes[index]) ? true : false;
+
                 return GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (BuildContext context) => SingleRecipePage(
-                        recipe: recipes[index],
+                        recipe: widget.recipes[index],
                       ),
                     ));
                   },
                   child: ListTile(
-                      leading: Container(
-                        height: 90,
-                        width: 90,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(recipes[index].images[0]),
-                            fit: BoxFit.cover,
-                          ),
+                    leading: Container(
+                      height: 90,
+                      width: 90,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(widget.recipes[index].images[0]),
+                          fit: BoxFit.cover,
                         ),
                       ),
-                      title: Text(recipes[index].name),
-                      subtitle: Text(recipes[index].description,maxLines: 2,
-          overflow: TextOverflow.ellipsis,)),
+                    ),
+                    title: Text(widget.recipes[index].name),
+                    subtitle: Text(
+                      widget.recipes[index].description,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    trailing: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          favourites.contains(widget.recipes[index])
+                              ? null
+                              : favourites.add(widget.recipes[index]);
+                        });
+                      },
+                      child: Icon(
+                        isFavorite ? Icons.favorite : Icons.favorite_outline,
+                        color: isFavorite ? mainColor : Colors.grey,
+                      ),
+                    ),
+                  ),
                 );
               }),
         ),
