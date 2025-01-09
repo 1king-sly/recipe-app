@@ -3,7 +3,6 @@ import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import 'package:recipe/constants/constants.dart';
 import 'package:recipe/pages/single_recipe_page.dart';
 import 'package:recipe/types/data_types.dart';
-import 'dart:developer';
 
 class SingleCategoryPage extends StatefulWidget {
   final CategoryName categoryName;
@@ -41,7 +40,6 @@ class _SingleCategoryPageState extends State<SingleCategoryPage> {
               separatorBuilder: (context, index) => const Divider(),
               itemCount: widget.recipes.length,
               itemBuilder: (context, index) {
-                log(widget.recipes[index] as String);
                 isFavorite =
                     favourites.contains(widget.recipes[index]) ? true : false;
 
