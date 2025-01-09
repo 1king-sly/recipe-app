@@ -17,25 +17,37 @@ class _CreateRecipePageState extends State<CreateRecipePage> {
   File? galleryFile;
   final picker = ImagePicker();
 
+  int numberOfInstructionsList = 2;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(children: [
-          SizedBox(
-            height: 150,
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.grey.shade200,
+            ),
+            height: 250,
             width: double.infinity,
-            child: galleryFile != null
-                ? GestureDetector(
-                    onTap: () {
-                      _showPicker(context: context);
-                    },
-                    child: const Center(
-                      child: Column(children: [
-                        Icon(Icons.photo_camera_front_sharp),
-                        SizedBox(height: 10),
-                        Text("Select a photo")
-                      ]),
+            child: galleryFile == null
+                ? Center(
+                    child: GestureDetector(
+                      onTap: () {
+                        _showPicker(context: context);
+                      },
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.photo, color: Colors.grey.shade500),
+                            const SizedBox(height: 10),
+                            Text(
+                              "Select a photo",
+                              style: TextStyle(
+                                color: Colors.grey.shade700,
+                              ),
+                            ),
+                          ]),
                     ),
                   )
                 : Container(
@@ -47,88 +59,98 @@ class _CreateRecipePageState extends State<CreateRecipePage> {
                     ),
                   ),
           ),
+          const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.all(20),
             child: Column(children: [
-              const TextField(
+              TextField(
                 decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.grey.shade200,
                   hintText: "Title of your amazing dish...",
-                  hintStyle: TextStyle(color: Colors.grey),
+                  hintStyle: const TextStyle(color: Colors.grey),
                   border: InputBorder.none,
                 ),
               ),
               const SizedBox(height: 10),
-              const TextField(
-                minLines: null,
-                maxLines: null,
-                expands: true,
+              TextField(
                 decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.grey.shade200,
                   hintText: "Description of your amazing dish...",
-                  hintStyle: TextStyle(color: Colors.grey),
+                  hintStyle: const TextStyle(color: Colors.grey),
                   border: InputBorder.none,
                 ),
               ),
               const SizedBox(height: 10),
-              const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Serves"),
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: "2 people",
-                        hintStyle: TextStyle(color: Colors.grey),
-                        border: InputBorder.none,
-                      ),
-                      keyboardType: TextInputType.number,
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                const Text("Serves"),
+                TextField(
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.grey.shade200,
+                    hintText: "2 people",
+                    hintStyle: const TextStyle(color: Colors.grey),
+                    border: InputBorder.none,
+                    constraints: const BoxConstraints(
+                      maxWidth: 100,
+                      maxHeight: 30,
                     ),
-                  ]),
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+              ]),
               const SizedBox(height: 10),
-              const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Cook Time"),
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: "1hr 30mins",
-                        hintStyle: TextStyle(color: Colors.grey),
-                        border: InputBorder.none,
-                      ),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                const Text("Cook Time"),
+                TextField(
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.grey.shade200,
+                    hintText: "1hr 30mins",
+                    hintStyle: const TextStyle(color: Colors.grey),
+                    border: InputBorder.none,
+                    constraints: const BoxConstraints(
+                      maxWidth: 150,
+                      maxHeight: 30,
                     ),
-                  ]),
+                  ),
+                ),
+              ]),
               const SizedBox(height: 10),
               const IngredientsCreateCard(),
               const SizedBox(height: 10),
               const InstructionsCreateCard(),
-              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   OutlinedButton(
                     style: OutlinedButton.styleFrom(
                       foregroundColor: Colors.white,
-                      backgroundColor:Colors.grey.shade900,
+                      backgroundColor: Colors.grey.shade900,
                       disabledBackgroundColor: Colors.grey.shade200,
-                      disabledForegroundColor:Colors.grey.shade500,
-                      padding:const EdgeInsets.all(10),
-
+                      disabledForegroundColor: Colors.grey.shade500,
+                      padding: const EdgeInsets.all(10),
                     ),
-                    onPressed:null,
+                    onPressed: null,
                     child: const Text("Save"),
                   ),
-
-                  const SizedBox(width:5),
-
-                      OutlinedButton(
+                  const SizedBox(width: 5),
+                  OutlinedButton(
                     style: OutlinedButton.styleFrom(
                       foregroundColor: Colors.white,
-                      backgroundColor:mainColor,
+                      backgroundColor: mainColor,
                       disabledBackgroundColor: mainColor,
-                      disabledForegroundColor:Colors.grey.shade500,
-                      padding:const EdgeInsets.all(10),
-
+                      disabledForegroundColor: Colors.grey.shade500,
+                      padding: const EdgeInsets.all(10),
                     ),
-                    onPressed:null,
-                    child: const Text("Publish"),
+                    onPressed: null,
+                    child: const Text(
+                      "Publish",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ],
               )
