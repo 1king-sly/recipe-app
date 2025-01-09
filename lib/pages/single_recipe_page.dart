@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:recipe/components/recipe_owner_card.dart';
 import 'package:recipe/constants/constants.dart';
 import 'package:recipe/types/data_types.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class SingleRecipePage extends StatefulWidget {
   final Recipe recipe;
@@ -16,6 +17,7 @@ class SingleRecipePage extends StatefulWidget {
 class _SingleRecipePageState extends State<SingleRecipePage> {
   @override
   Widget build(BuildContext context) {
+    PageController _controller = PageController();
     List<Widget> ingredientWidgets =
         widget.recipe.ingredients.map((ingredient) {
       return Column(
@@ -39,39 +41,36 @@ class _SingleRecipePageState extends State<SingleRecipePage> {
         .map((item) => Container(
               margin: const EdgeInsets.all(5.0),
               child: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                  child: Stack(
-                    children: <Widget>[
-                      Image.asset(item, fit: BoxFit.cover, width: 1000.0),
-                      Positioned(
-                        bottom: 0.0,
-                        left: 0.0,
-                        right: 0.0,
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Color.fromARGB(200, 0, 0, 0),
-                                Color.fromARGB(0, 0, 0, 0)
-                              ],
-                              begin: Alignment.bottomCenter,
-                              end: Alignment.topCenter,
-                            ),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 20.0),
-                          child: const Text(
-                            'Sample image',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                            ),
+                borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+                child: Stack(
+                  children: <Widget>[
+                    Image.asset(item,
+                        fit: BoxFit.cover, width: double.infinity),
+                    Positioned(
+                      bottom: 0.0,
+                      left: 0.0,
+                      right: 0.0,
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Color.fromARGB(200, 0, 0, 0),
+                              Color.fromARGB(0, 0, 0, 0)
+                            ],
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
                           ),
                         ),
+                        foregroundDecoration: const BoxDecoration(
+                          color: Color.fromRGBO(255, 102, 14, 0.2),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 20.0),
                       ),
-                    ],
-                  )),
+                    ),
+                  ],
+                ),
+              ),
             ))
         .toList();
     return Scaffold(
@@ -103,14 +102,28 @@ class _SingleRecipePageState extends State<SingleRecipePage> {
                 ),
               ),
               const SizedBox(height: 5),
-              CarouselSlider(
-                options: CarouselOptions(
-                  autoPlay: true,
-                  aspectRatio: 2.0,
-                  enlargeCenterPage: true,
-                ),
-                items: imageSliders,
-              ),
+              SizedBox(
+                  height: 200,
+                  width: double.infinity,
+                  child: Stack(
+                    children: [
+                      PageView(
+                        controller: _controller,
+                        children: imageSliders,
+                      ),
+                      Container(
+                        alignment: const Alignment(0, 0.9),
+                        child: SmoothPageIndicator(
+                          controller: _controller,
+                          count: imageSliders.length,
+                          effect: const ExpandingDotsEffect(
+                              dotHeight: 12,
+                              dotWidth: 12,
+                              activeDotColor: mainColor),
+                        ),
+                      )
+                    ],
+                  )),
               const SizedBox(
                 height: 5,
               ),
