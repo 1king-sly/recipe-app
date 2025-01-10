@@ -17,14 +17,29 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  
   int currentIndex = 0;
-  List screens = const [
-    Home(),
-    FavoritesPage(),
-    CreateRecipePage(),
-    BlogPage(),
-    ProfilePage(),
-  ];
+  List<Widget> screens = [];
+  
+  @override
+  void initState() {
+    super.initState();
+    screens = [
+     const Home(),
+    const  FavoritesPage(),
+      CreateRecipePage(onRecipeCreated: setCurrentIndex),
+    const  BlogPage(),
+    const  ProfilePage(),
+    ];
+  }
+
+  // Function to update the currentIndex
+  void setCurrentIndex(int index) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

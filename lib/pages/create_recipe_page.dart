@@ -5,12 +5,12 @@ import 'package:image_picker/image_picker.dart';
 import 'package:recipe/components/ingredients_create_card.dart';
 import 'package:recipe/components/instructions_create_card.dart';
 import 'package:recipe/constants/constants.dart';
-import 'package:recipe/pages/home_page.dart';
 
 import 'package:recipe/types/data_types.dart';
 
 class CreateRecipePage extends StatefulWidget {
-  const CreateRecipePage({super.key});
+  final Function(int) onRecipeCreated;
+  const CreateRecipePage({super.key, required this.onRecipeCreated});
 
   @override
   State<CreateRecipePage> createState() => _CreateRecipePageState();
@@ -188,19 +188,21 @@ class _CreateRecipePageState extends State<CreateRecipePage> {
                           .map((controller) => controller.text)
                           .toList();
 
-                      recipes.add(Recipe(
-                        category: CategoryName.Lunch,
-                        people: int.parse(peopleController.text),
-                        name: titleController.text,
-                        description: descController.text,
-                        time: timeController.text,
-                        user: RecipeOwner(name: "John Doe"),
-                        images: ['assets/images/pilau.jpg'],
-                        ingredients: ingredientList,
-                        instructions: instructionList,
-                      ));
+                      recipes.insert(
+                          0,
+                          Recipe(
+                            category: CategoryName.Lunch,
+                            people: int.parse(peopleController.text),
+                            name: titleController.text,
+                            description: descController.text,
+                            time: timeController.text,
+                            user: RecipeOwner(name: "John Doe"),
+                            images: ['assets/images/pilau.jpg'],
+                            ingredients: ingredientList,
+                            instructions: instructionList,
+                          ));
 
-                      Navigator.pop(context);
+                      widget.onRecipeCreated(0);
                     },
                     child: const Text(
                       "Publish",
