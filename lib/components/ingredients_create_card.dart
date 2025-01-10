@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 
 class IngredientsCreateCard extends StatefulWidget {
-  const IngredientsCreateCard({super.key});
+    final List<TextEditingController> ingredientControllers;
+
+  const IngredientsCreateCard({super.key, required this.ingredientControllers});
 
   @override
   State<IngredientsCreateCard> createState() => _IngredientsCreateCardState();
 }
 
 class _IngredientsCreateCardState extends State<IngredientsCreateCard> {
-  int numberOfIngredientsList = 2;
 
   @override
   Widget build(BuildContext context) {
+      int numberOfIngredientsList = widget.ingredientControllers.length;
+
     List<Widget> ingredientWidgets = List.generate(
       numberOfIngredientsList,
       (index) {
@@ -26,6 +29,10 @@ class _IngredientsCreateCardState extends State<IngredientsCreateCard> {
                   Expanded(
                     flex: 4,
                     child: TextField(
+                                      maxLines: null,
+
+                                        controller: widget.ingredientControllers[index],
+
                       decoration: InputDecoration(
                         hintText: index % 2 == 0 ? "100ml water" : "200g flour",
                         hintStyle: const TextStyle(color: Colors.grey),
@@ -67,7 +74,8 @@ class _IngredientsCreateCardState extends State<IngredientsCreateCard> {
               child: GestureDetector(
                 onTap: () {
                   setState(() {
-                    numberOfIngredientsList += 1;
+                    widget.ingredientControllers
+                        .add(TextEditingController());
                   });
                 },
                 child: const Row(

@@ -93,14 +93,7 @@ class _SingleRecipePageState extends State<SingleRecipePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                widget.recipe.name,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey,
-                ),
-              ),
+
               const SizedBox(height: 5),
               SizedBox(
                   height: 200,
@@ -116,7 +109,7 @@ class _SingleRecipePageState extends State<SingleRecipePage> {
                         child: SmoothPageIndicator(
                           controller: _controller,
                           count: imageSliders.length,
-                          effect: const ExpandingDotsEffect(
+                          effect: const WormEffect(
                               dotHeight: 12,
                               dotWidth: 12,
                               activeDotColor: mainColor),

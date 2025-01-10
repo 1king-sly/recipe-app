@@ -47,6 +47,7 @@ class _HomePageState extends State<HomePage> {
               ))
         ],
       ),
+      resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
           onPressed: () {
             setState(() {
@@ -176,13 +177,15 @@ class _HomeState extends State<Home> {
                 itemCount: 6,
                 itemBuilder: (context, index) {
                   return RecipeCard(
-                    imagePath: recipes[index].images[0], recipeName: recipes[index].name,
-                    recipe:recipes[index],
+                    imagePath: recipes[index].images[0],
+                    recipeName: recipes[index].name,
+                    recipe: recipes[index],
                   );
                 })
           ],
         ),
-      )),
+      ),
+      ),
     );
   }
 }

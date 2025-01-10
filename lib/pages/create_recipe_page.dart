@@ -5,6 +5,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:recipe/components/ingredients_create_card.dart';
 import 'package:recipe/components/instructions_create_card.dart';
 import 'package:recipe/constants/constants.dart';
+import 'package:recipe/pages/home_page.dart';
+
+import 'package:recipe/types/data_types.dart';
 
 class CreateRecipePage extends StatefulWidget {
   const CreateRecipePage({super.key});
@@ -16,8 +19,30 @@ class CreateRecipePage extends StatefulWidget {
 class _CreateRecipePageState extends State<CreateRecipePage> {
   File? galleryFile;
   final picker = ImagePicker();
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descController = TextEditingController();
+  final TextEditingController peopleController = TextEditingController();
+  final TextEditingController timeController = TextEditingController();
 
-  int numberOfInstructionsList = 2;
+  final List<TextEditingController> ingredients = [
+    TextEditingController(),
+    TextEditingController(),
+  ];
+  final List<TextEditingController> instructions = [
+    TextEditingController(),
+    TextEditingController(),
+  ];
+
+  @override
+  void dispose() {
+    for (var controller in ingredients) {
+      controller.dispose();
+    }
+    for (var controller in instructions) {
+      controller.dispose();
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +89,8 @@ class _CreateRecipePageState extends State<CreateRecipePage> {
             padding: const EdgeInsets.all(20),
             child: Column(children: [
               TextField(
+                maxLines: null,
+                controller: titleController,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.grey.shade200,
@@ -74,6 +101,8 @@ class _CreateRecipePageState extends State<CreateRecipePage> {
               ),
               const SizedBox(height: 10),
               TextField(
+                controller: descController,
+                maxLines: null,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.grey.shade200,
@@ -86,6 +115,7 @@ class _CreateRecipePageState extends State<CreateRecipePage> {
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 const Text("Serves"),
                 TextField(
+                  controller: peopleController,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.grey.shade200,
@@ -104,6 +134,7 @@ class _CreateRecipePageState extends State<CreateRecipePage> {
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 const Text("Cook Time"),
                 TextField(
+                  controller: timeController,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.grey.shade200,
@@ -118,9 +149,13 @@ class _CreateRecipePageState extends State<CreateRecipePage> {
                 ),
               ]),
               const SizedBox(height: 10),
-              const IngredientsCreateCard(),
+              IngredientsCreateCard(
+                ingredientControllers: ingredients,
+              ),
               const SizedBox(height: 10),
-              const InstructionsCreateCard(),
+              InstructionsCreateCard(
+                instructionControllers: instructions,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -144,7 +179,29 @@ class _CreateRecipePageState extends State<CreateRecipePage> {
                       disabledForegroundColor: Colors.grey.shade500,
                       padding: const EdgeInsets.all(10),
                     ),
-                    onPressed: null,
+                    onPressed: () {
+                      List<String> ingredientList = ingredients
+                          .map((controller) => controller.text)
+                          .toList();
+
+                      List<String> instructionList = instructions
+                          .map((controller) => controller.text)
+                          .toList();
+
+                      recipes.add(Recipe(
+                        category: CategoryName.Lunch,
+                        people: int.parse(peopleController.text),
+                        name: titleController.text,
+                        description: descController.text,
+                        time: timeController.text,
+                        user: RecipeOwner(name: "John Doe"),
+                        images: ['assets/images/pilau.jpg'],
+                        ingredients: ingredientList,
+                        instructions: instructionList,
+                      ));
+
+                      Navigator.pop(context);
+                    },
                     child: const Text(
                       "Publish",
                       style: TextStyle(
@@ -198,6 +255,7 @@ class _CreateRecipePageState extends State<CreateRecipePage> {
   ) async {
     final pickedFile = await picker.pickImage(source: img);
     XFile? xfilePick = pickedFile;
+
     setState(
       () {
         if (xfilePick != null) {
