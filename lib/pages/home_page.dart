@@ -7,6 +7,7 @@ import 'package:recipe/pages/create_recipe_page.dart';
 import 'package:recipe/pages/blog_page.dart';
 import 'package:recipe/pages/favorites_page.dart';
 import 'package:recipe/pages/profile_page.dart';
+import 'package:recipe/pages/search_page.dart';
 import 'package:recipe/types/data_types.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,19 +18,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  
   int currentIndex = 0;
   List<Widget> screens = [];
-  
+
   @override
   void initState() {
     super.initState();
     screens = [
-     const Home(),
-    const  FavoritesPage(),
+      Home(setSearchPageIndex: setCurrentIndex),
+      const FavoritesPage(),
       CreateRecipePage(onRecipeCreated: setCurrentIndex),
-    const  BlogPage(),
-    const  ProfilePage(),
+      const BlogPage(),
+      const ProfilePage(),
+      const SearchPage(),
     ];
   }
 
@@ -141,7 +142,9 @@ class _HomePageState extends State<HomePage> {
 }
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final Function(int) setSearchPageIndex;
+
+  const Home({super.key, required this.setSearchPageIndex});
 
   @override
   State<Home> createState() => _HomeState();
@@ -152,54 +155,56 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-          child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            const MySearchBar(),
-            const SizedBox(
-              height: 20,
-            ),
-            const Categories(),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  "Popular Recipes",
-                  style: TextStyle(
-                    fontSize: 12,
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              MySearchBar(
+                setSearchPageIndex: widget.setSearchPageIndex,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Categories(),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Popular Recipes",
+                    style: TextStyle(
+                      fontSize: 12,
+                    ),
                   ),
-                ),
-                IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.arrow_right_outlined)),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            GridView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.78,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 20),
-                itemCount: 6,
-                itemBuilder: (context, index) {
-                  return RecipeCard(
-                    imagePath: recipes[index].images[0],
-                    recipeName: recipes[index].name,
-                    recipe: recipes[index],
-                  );
-                })
-          ],
+                  IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.arrow_right_outlined)),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              GridView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.78,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 20),
+                  itemCount: 6,
+                  itemBuilder: (context, index) {
+                    return RecipeCard(
+                      imagePath: recipes[index].images[0],
+                      recipeName: recipes[index].name,
+                      recipe: recipes[index],
+                    );
+                  })
+            ],
+          ),
         ),
-      ),
       ),
     );
   }
