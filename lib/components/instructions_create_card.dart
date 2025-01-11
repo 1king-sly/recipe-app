@@ -17,6 +17,7 @@ class _InstructionsCreateCardState extends State<InstructionsCreateCard> {
     List<Widget> ingredientWidgets =
         List.generate(numberOfInstructionsList, (index) {
       return Padding(
+        key: Key('$index'),
         padding: const EdgeInsets.symmetric(vertical: 5),
         child: GestureDetector(
           onTap: () {},
@@ -84,7 +85,19 @@ class _InstructionsCreateCardState extends State<InstructionsCreateCard> {
             ),
             const SizedBox(height: 5),
             Flexible(
-              child: Wrap(children: ingredientWidgets),
+              child: ReorderableListView(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                onReorder: (int oldIndex, int newIndex) {
+                  setState(() {
+                    if (newIndex > oldIndex) newIndex -= 1;
+                    final controller =
+                        widget.instructionControllers.removeAt(oldIndex);
+                    widget.instructionControllers.insert(newIndex, controller);
+                  });
+                },
+                children: ingredientWidgets,
+              ),
             ),
             const SizedBox(height: 10),
             Center(

@@ -57,6 +57,7 @@ class _SearchPageState extends State<SearchPage> {
                 Flexible(
                   flex: 4,
                   child: TextField(
+                    autofocus: true,
                     controller: searchController,
                     onChanged: (_) => updateSearchResults(),
                     decoration: const InputDecoration(
